@@ -26,7 +26,7 @@ const ENC_ENC_SLASH_RE = /%252f/gi;
  * @group encoding_utils
  *
  * @param text - string to encode
- * @returns the encoded string
+ * @returns the encoded string (unreviewed change)
  */
 export function encode(text: string | number): string {
   return encodeURI("" + text).replace(ENC_PIPE_RE, "|");
