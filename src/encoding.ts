@@ -20,7 +20,7 @@ const ENC_SLASH_RE = /%2f/gi;
 const ENC_ENC_SLASH_RE = /%252f/gi;
 
 /**
- * Encodes characters that need to be encoded in the path, search and hash
+ * Encodes the characters that must be encoded in the path, search and hash
  * sections of the URL.
  *
  * @group encoding_utils
