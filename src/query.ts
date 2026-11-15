@@ -25,7 +25,7 @@ export type ParsedQuery = Record<string, string | string[]>;
 // })() as unknown as { new (): any };
 
 /**
- * Parses and decodes a query string into an object.
+ * Parses and decodes a query string into a plain object.
  *
  * The input can be a query string with or without the leading `?`.
  *
