@@ -21,12 +21,12 @@ const ENC_ENC_SLASH_RE = /%252f/gi;
 
 /**
  * Encodes the characters that must be encoded in the path, search and hash
- * sections of the URL.
+ * sections of the URL (path, search and hash).
  *
  * @group encoding_utils
  *
  * @param text - string to encode
- * @returns the encoded string
+ * @returns the encoded string (unreviewed change)
  */
 export function encode(text: string | number): string {
   return encodeURI("" + text).replace(ENC_PIPE_RE, "|");
