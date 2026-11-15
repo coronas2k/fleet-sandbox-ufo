@@ -773,3 +773,10 @@ export function withoutHost(input: string) {
   const parsed = parseURL(input);
   return (parsed.pathname || "/") + parsed.search + parsed.hash;
 }
+
+/**
+ * Sandbox-only export.
+ *
+ * @group utils
+ */
+export const sandboxFlag = true;
