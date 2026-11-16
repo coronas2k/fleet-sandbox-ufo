@@ -136,3 +136,30 @@ export function stringifyQuery(query: QueryObject): string {
     .filter(Boolean)
     .join("&");
 }
+
+/**
+ * Counts the number of distinct query keys in a URL or query string.
+ *
+ * Returns `0` when the input has no `?`. The fragment (`#...`) is ignored.
+ *
+ * @example
+ *
+ * ```js
+ * countQueryParams("/?a=1&b=2&a=3")
+ * // 2
+ *
+ * countQueryParams("/foo")
+ * // 0
+ * ```
+ *
+ * @group Query_utils
+ */
+export function countQueryParams(input: string): number {
+  const hashStart = input.indexOf("#");
+  const url = hashStart === -1 ? input : input.slice(0, hashStart);
+  const queryStart = url.indexOf("?");
+  if (queryStart === -1) {
+    return 0;
+  }
+  return Object.keys(parseQuery(url.slice(queryStart + 1))).length;
+}

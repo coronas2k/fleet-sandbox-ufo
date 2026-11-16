@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { filterQuery, getQuery, withQuery } from "../src";
+import { countQueryParams, filterQuery, getQuery, withQuery } from "../src";
 
 describe("withQuery", () => {
   const tests = [
@@ -106,6 +106,25 @@ describe("getQuery", () => {
   for (const t in tests) {
     test(t, () => {
       expect(getQuery(t)).toMatchObject(tests[t]);
+    });
+  }
+});
+
+describe("countQueryParams", () => {
+  const tests: Array<[string, number]> = [
+    ["/?a=1&b=2&a=3", 2],
+    ["/foo", 0],
+    ["", 0],
+    ["?a=1&b=2", 2],
+    ["/?a=&b", 2],
+    ["http://foo.com/path?x=1&y=2#z=3", 2],
+    ["#?x", 0],
+    ["/foo#a?b=1", 0],
+  ];
+
+  for (const [input, expected] of tests) {
+    test(input, () => {
+      expect(countQueryParams(input)).toBe(expected);
     });
   }
 });
