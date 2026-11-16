@@ -1,0 +1,11 @@
+{
+  "attribution": false,
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [{ "type": "mcp_tool", "server": "paseo", "tool": "fleet_state", "input": { "as": "session-start-hook" } }]
+      }
+    ]
+  }
+}
