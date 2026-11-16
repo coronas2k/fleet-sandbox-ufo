@@ -174,3 +174,9 @@ describe("hasQueryParam", () => {
     expect(hasQueryParam("/?constructor=1", "constructor")).toBe(false);
   });
 });
+
+describe("probe finding A", () => {
+  test("passes", () => {
+    expect(1).toBe(1);
+  });
+});
