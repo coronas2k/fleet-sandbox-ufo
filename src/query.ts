@@ -4,6 +4,7 @@ import {
   encodeQueryKey,
   encodeQueryValue,
 } from "./encoding";
+import { parseURL } from "./parse";
 
 export type QueryValue =
   | string
@@ -135,4 +136,27 @@ export function stringifyQuery(query: QueryObject): string {
     .map((k) => encodeQueryItem(k, query[k]))
     .filter(Boolean)
     .join("&");
+}
+
+/**
+ * Checks whether the query of a URL, or a `?`-prefixed query string, contains the given key, even when its value is empty.
+ *
+ * @example
+ *
+ * ```js
+ * hasQueryParam("/?a=1&b", "b");
+ * // true
+ *
+ * hasQueryParam("/?a=1", "b");
+ * // false
+ * ```
+ *
+ * @note
+ * The `__proto__` and `constructor` keys are ignored by `parseQuery`, so they always return `false`.
+ *
+ * @group Query_utils
+ */
+export function hasQueryParam(input: string, key: string): boolean {
+  const query = parseQuery(parseURL(input).search);
+  return Object.prototype.hasOwnProperty.call(query, key);
 }
