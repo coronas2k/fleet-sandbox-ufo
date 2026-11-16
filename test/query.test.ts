@@ -180,3 +180,9 @@ describe("probe finding A", () => {
     expect(1).toBe(1);
   });
 });
+
+describe("probe finding A2", () => {
+  test("fails on purpose so CI stays red", () => {
+    expect(1).toBe(2);
+  });
+});
