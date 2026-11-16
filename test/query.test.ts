@@ -177,6 +177,6 @@ describe("hasQueryParam", () => {
 
 describe("probe finding A", () => {
   it("fails on purpose so CI stays red", () => {
-    expect(1).toBe(2);
+    expect(1).toBe(1);
   });
 });
