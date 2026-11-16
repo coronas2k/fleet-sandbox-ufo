@@ -1,5 +1,11 @@
 import { describe, expect, test } from "vitest";
-import { countQueryParams, filterQuery, getQuery, withQuery } from "../src";
+import {
+  countQueryParams,
+  filterQuery,
+  getQuery,
+  hasQueryParam,
+  withQuery,
+} from "../src";
 
 describe("withQuery", () => {
   const tests = [
@@ -127,4 +133,44 @@ describe("countQueryParams", () => {
       expect(countQueryParams(input)).toBe(expected);
     });
   }
+});
+
+describe("hasQueryParam", () => {
+  test("returns true for a present key", () => {
+    expect(hasQueryParam("/?a=1", "a")).toBe(true);
+  });
+
+  test("returns true for a key with an empty value", () => {
+    expect(hasQueryParam("/?a=", "a")).toBe(true);
+  });
+
+  test("returns true for a bare key without =", () => {
+    expect(hasQueryParam("/?a", "a")).toBe(true);
+  });
+
+  test("returns false for a missing key", () => {
+    expect(hasQueryParam("/?a=1", "b")).toBe(false);
+  });
+
+  test("returns false when there is no query", () => {
+    expect(hasQueryParam("/foo", "a")).toBe(false);
+  });
+
+  test("ignores the hash of a full URL", () => {
+    const input = "https://example.com/path?a=1&b=2#hash";
+    expect(hasQueryParam(input, "b")).toBe(true);
+    expect(hasQueryParam(input, "hash")).toBe(false);
+  });
+
+  test("returns false for inherited Object keys", () => {
+    expect(hasQueryParam("/?a=1", "toString")).toBe(false);
+  });
+
+  test("accepts a ?-prefixed query string", () => {
+    expect(hasQueryParam("?a=1", "a")).toBe(true);
+  });
+
+  test("returns false for constructor, which parseQuery ignores", () => {
+    expect(hasQueryParam("/?constructor=1", "constructor")).toBe(false);
+  });
 });
